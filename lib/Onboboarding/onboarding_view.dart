@@ -137,15 +137,21 @@ class _OnboardingViewState extends State<OnboardingView> {
                           color: const Color(0xffC4C4C4)),
                     ),
                   ),
-                Center(
-                  child: SmoothPageIndicator(
-                    controller: pageController,
-                    count: controller.items.length,
-                    effect: const ExpandingDotsEffect(
-                      activeDotColor: Colors.black,
-                      dotHeight: 8,
-                      dotWidth: 13,
-                    ),
+                if (currentPage == 0)
+                  const SizedBox(
+                    width: 70,
+                  ),
+                if (currentPage == 2)
+                  const SizedBox(
+                    width: 35,
+                  ),
+                SmoothPageIndicator(
+                  controller: pageController,
+                  count: controller.items.length,
+                  effect: const ExpandingDotsEffect(
+                    activeDotColor: Colors.black,
+                    dotHeight: 8,
+                    dotWidth: 13,
                   ),
                 ),
                 if (!isLastPage)

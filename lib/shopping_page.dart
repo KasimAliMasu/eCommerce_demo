@@ -1,7 +1,10 @@
+import 'package:ecommerce_app/category_images.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
+  final controller = CategoryImages();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,9 +82,13 @@ class HomePage extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      width: 66,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       height: 30,
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.grey[100]!),
+                      ),
                       child: Row(
                         children: [
                           Text(
@@ -99,9 +106,13 @@ class HomePage extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Container(
-                      width: 66,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       height: 30,
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.grey[100]!),
+                      ),
                       child: Row(
                         children: [
                           Text(
@@ -123,48 +134,49 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Container(
-              height: 90,
-              color: const Color(0xffFFFFFF),
-              child: ListView(
+              height: 100,
+              color: Colors.transparent,
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  _buildCategoryIcon('Beauty', 'images/beautylogocategory.png'),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  _buildCategoryIcon(
-                      'Fashion', 'images/fashionlogocategory.png'),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  _buildCategoryIcon('Kids', 'images/kidslogocategory.png'),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  _buildCategoryIcon('Mens', 'images/menslogocategory.png'),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  _buildCategoryIcon('Womens', 'images/womenslogocategory.png'),
-                ],
+                itemCount: controller.items.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage:
+                              AssetImage(controller.items[index].image),
+                          radius: 30,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          controller.items[index].title,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 12,
+                            color: const Color(0xff21003D),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
+            Container(
+              child: Column(
+                children: [
+                  Image.asset(
+                    'images/offProduct.png',
+                    width: 343,
+                    height: 189,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildCategoryIcon(String label, String imageUrl) {
-    return Column(
-      children: [
-        CircleAvatar(
-          backgroundImage: AssetImage(imageUrl),
-          radius: 30,
-        ),
-        const SizedBox(height: 5),
-        Text(label),
-      ],
     );
   }
 }
