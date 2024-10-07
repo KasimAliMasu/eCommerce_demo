@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/home/trending_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,7 +53,8 @@ class TrendingProduct extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: OutlinedButton(
                 onPressed: () {
-                  // go to next page
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (_) => TrendingProductsScreen()));
                 },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(

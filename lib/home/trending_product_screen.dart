@@ -1,27 +1,9 @@
-import 'package:ecommerce_app/home/widgets/all_featured.dart';
-import 'package:ecommerce_app/home/widgets/category_widget.dart';
-import 'package:ecommerce_app/home/widgets/circleavatar_widget.dart';
-import 'package:ecommerce_app/home/widgets/deal_widget.dart';
-import 'package:ecommerce_app/home/widgets/heelsimage_widget.dart';
-import 'package:ecommerce_app/home/widgets/images_product.dart';
-import 'package:ecommerce_app/home/widgets/offproduct_widget.dart';
-import 'package:ecommerce_app/home/widgets/offshoes_widget.dart';
-import 'package:ecommerce_app/home/widgets/product_widget.dart';
+import 'package:ecommerce_app/home/widgets/items_widget.dart';
 import 'package:ecommerce_app/home/widgets/search_widget.dart';
-import 'package:ecommerce_app/home/widgets/specialoffers_widget.dart';
-import 'package:ecommerce_app/home/widgets/summer_sale.dart';
-import 'package:ecommerce_app/home/widgets/trending_product.dart';
-import 'package:ecommerce_app/model/category_images.dart';
-import 'package:ecommerce_app/model/images_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../model/item_index.dart';
-
-class HomePage extends StatelessWidget {
-  final controller = CategoryImages();
-  final indexController = ImageItems();
-
+class TrendingProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,35 +30,17 @@ class HomePage extends StatelessWidget {
           const SizedBox(width: 15),
         ],
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SearchWidget(),
-              const SizedBox(height: 20),
-              const all_Featured(),
-              const SizedBox(height: 20),
-              CategoryWidget(controller: controller),
-              const OffProductWidget(),
-              const SizedBox(height: 10),
-              const CircleAvatarWidget(),
-              const SizedBox(height: 12),
-              const DealWidget(),
-              const SizedBox(height: 10),
-              ProductWidget(indexController: indexController),
-              const SizedBox(height: 20),
-              const SpecialOffersWidget(),
-              HeelsImageWidget(),
-              const SizedBox(height: 16),
-              const TrendingProduct(),
-              const SizedBox(height: 16),
-              ImagesProduct(items: productItems),
-              const SizedBox(height: 16),
-              SummerSale(),
-              const SizedBox(height: 16),
-              OffShoesWidget()
+              SearchWidget(),
+              SizedBox(
+                height: 15,
+              ),
+              ItemsWidget()
             ],
           ),
         ),
@@ -97,12 +61,11 @@ class HomePage extends StatelessWidget {
                     onTap: () {},
                     child: SvgPicture.asset(
                       'icons/home 1.svg',
-                      color: Colors.red,
                     ),
                   ),
                   const Text(
                     "Home",
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: Colors.black),
                   ),
                 ],
               ),
@@ -111,10 +74,11 @@ class HomePage extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     'icons/heart 1.svg',
+                    color: Colors.red,
                   ),
                   const Text(
                     "Wishlist",
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.red),
                   ),
                 ],
               ),
