@@ -125,7 +125,7 @@ class ProductItems {
         totalRatings: '1,35,566',
       ),
       ProductImage(
-        imagePath: 'images/hotChocalate.png',
+        imagePath: 'images/hotChocolate.png',
         productName: 'Hot chocolate',
         description: 'chocolate with ashwagandha and get a coconu...',
         price: '₹200',
