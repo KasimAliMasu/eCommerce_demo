@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/home/trending_product_screen.dart';
+import 'package:ecommerce_app/trending/trending_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

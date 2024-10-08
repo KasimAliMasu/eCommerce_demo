@@ -147,13 +147,16 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        backgroundColor: Colors.white,
-        elevation: 5,
-        onPressed: () {},
-        child: SvgPicture.asset(
-          'icons/shopping-cart 2.svg',
+      floatingActionButton: CircleAvatar(
+        radius: 20,
+        child: FloatingActionButton(
+          shape: CircleBorder(),
+          backgroundColor: Colors.white,
+          elevation: 5,
+          onPressed: () {},
+          child: SvgPicture.asset(
+            'icons/shopping-cart 2.svg',
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

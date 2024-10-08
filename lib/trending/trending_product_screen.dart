@@ -1,9 +1,13 @@
-import 'package:ecommerce_app/home/widgets/items_widget.dart';
+import 'package:ecommerce_app/model/trending_photos.dart';
+import 'package:ecommerce_app/trending/widget/items_widget.dart';
 import 'package:ecommerce_app/home/widgets/search_widget.dart';
+import 'package:ecommerce_app/trending/widget/trending_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class TrendingProductsScreen extends StatelessWidget {
+  final List<ProductImage> controllers = ProductItems().getProductList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,17 +34,18 @@ class TrendingProductsScreen extends StatelessWidget {
           const SizedBox(width: 15),
         ],
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SearchWidget(),
-              SizedBox(
-                height: 15,
-              ),
-              ItemsWidget()
+              const SearchWidget(),
+              const SizedBox(height: 15),
+              const ItemsWidget(),
+              const SizedBox(height: 20),
+              // Pass the controllers list to the TrendingItems widget
+              TrendingItems(controllers: controllers),
             ],
           ),
         ),
