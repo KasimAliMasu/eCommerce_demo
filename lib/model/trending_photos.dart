@@ -3,7 +3,6 @@ class ProductImage {
   final String productName;
   final String description;
   final String price;
-
   final String ratings;
   final String totalRatings;
 

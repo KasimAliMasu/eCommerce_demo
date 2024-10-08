@@ -44,7 +44,6 @@ class TrendingProductsScreen extends StatelessWidget {
               const SizedBox(height: 15),
               const ItemsWidget(),
               const SizedBox(height: 20),
-              // Pass the controllers list to the TrendingItems widget
               TrendingItems(controllers: controllers),
             ],
           ),
