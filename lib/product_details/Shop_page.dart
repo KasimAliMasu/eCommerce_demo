@@ -1,12 +1,12 @@
 import 'package:ecommerce_app/home/shopping_page.dart';
+import 'package:ecommerce_app/product_details/widget/button_Widget.dart';
+import 'package:ecommerce_app/product_details/widget/function_widget.dart';
 import 'package:ecommerce_app/product_details/widget/shop_image.dart';
 import 'package:ecommerce_app/trending/widget/trending_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-// Example model for ShopItems
 
 class ShopPage extends StatefulWidget {
   @override
@@ -141,13 +141,109 @@ class _ShopPageState extends State<ShopPage> {
                       }).toList(),
                     ),
                   ),
+                  const SizedBox(height: 16),
                   Text(
                     'Nike Sneakers',
                     style: GoogleFonts.montserrat(
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
-                  )
+                  ),
+                  Text(
+                    'Vision Alta Men’s Shoes Size (All Colours)',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        '★ ★ ★ ★ ☆',
+                        style: TextStyle(
+                          color: Color(0xffEDB310),
+                          fontSize: 21,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '56,890',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xff828282)),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '₹2,999',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xff828282),
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '₹1,500',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '50% Off',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: const Color(0xffFA7189)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Product Details',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text:
+                          'Perhaps the most iconic sneaker of all-time, this original "Chicago" colorway is the cornerstone to any sneaker collection. Made famous in 1985 by Michael Jordan, the shoe has stood the test of time, becoming the most famous colorway of the Air Jordan 1. This 2015 release saw the ...',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: ' More',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xffFA7189),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const FunctionWidget(),
+                  const SizedBox(height: 10),
+                  const ButtonWidget(),
+                  const SizedBox(height: 10),
+                  //  add in
                 ],
               ),
             ],

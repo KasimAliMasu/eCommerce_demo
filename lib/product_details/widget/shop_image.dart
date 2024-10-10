@@ -4,7 +4,6 @@ class ShopItems {
   ShopItems({required this.image});
 }
 
-// Dummy data for shop items
 final List<ShopItems> shopItemsList = [
   ShopItems(
     image: "images/nike1.png",
