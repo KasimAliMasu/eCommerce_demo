@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/product_details/Shop_page.dart';
 import 'package:ecommerce_app/home/widgets/all_featured.dart';
 import 'package:ecommerce_app/home/widgets/category_widget.dart';
 import 'package:ecommerce_app/home/widgets/circleavatar_widget.dart';
@@ -13,6 +14,7 @@ import 'package:ecommerce_app/home/widgets/summer_sale.dart';
 import 'package:ecommerce_app/home/widgets/trending_product.dart';
 import 'package:ecommerce_app/model/category_images.dart';
 import 'package:ecommerce_app/model/images_product.dart';
+import 'package:ecommerce_app/trending/widget/trending_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -109,8 +111,20 @@ class HomePage extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SvgPicture.asset(
-                    'icons/heart 1.svg',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TrendingItems(
+                            controllers: [],
+                          ),
+                        ),
+                      );
+                    },
+                    child: SvgPicture.asset(
+                      'icons/heart 1.svg',
+                    ),
                   ),
                   const Text(
                     "Wishlist",
@@ -151,7 +165,14 @@ class HomePage extends StatelessWidget {
         shape: const CircleBorder(),
         backgroundColor: Colors.white,
         elevation: 5,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShopPage(),
+            ),
+          );
+        },
         child: SvgPicture.asset(
           'icons/shopping-cart 2.svg',
         ),

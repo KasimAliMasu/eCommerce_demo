@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/product_details/Shop_page.dart';
 import 'package:ecommerce_app/model/trending_photos.dart';
 import 'package:ecommerce_app/trending/widget/items_widget.dart';
 import 'package:ecommerce_app/home/widgets/search_widget.dart';
@@ -119,7 +120,14 @@ class TrendingProductsScreen extends StatelessWidget {
         shape: const CircleBorder(),
         backgroundColor: Colors.white,
         elevation: 5,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShopPage(),
+            ),
+          );
+        },
         child: SvgPicture.asset(
           'icons/shopping-cart 2.svg',
         ),
