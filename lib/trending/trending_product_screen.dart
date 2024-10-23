@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/Profile.dart';
 import 'package:ecommerce_app/product_details/Shop_page.dart';
 import 'package:ecommerce_app/model/trending_photos.dart';
 import 'package:ecommerce_app/trending/widget/items_widget.dart';
@@ -26,10 +27,20 @@ class TrendingProductsScreen extends StatelessWidget {
           ],
         ),
         actions: [
-          CircleAvatar(
-            child: Image.asset(
-              'images/profilelogo.png',
-              height: 40,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(),
+                ),
+              );
+            },
+            child: CircleAvatar(
+              child: Image.asset(
+                'images/profilelogo.png',
+                height: 40,
+              ),
             ),
           ),
           const SizedBox(width: 15),

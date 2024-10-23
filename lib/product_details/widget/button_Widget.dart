@@ -1,9 +1,11 @@
+import 'package:ecommerce_app/product_details/widget/similar_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({
+  final List<SimilarImage> products = SimilarItems().similarProductList();
+  ButtonWidget({
     super.key,
   });
 
@@ -352,6 +354,7 @@ class ButtonWidget extends StatelessWidget {
             )
           ],
         ),
+        SimilarProductGrid()
       ],
     );
   }

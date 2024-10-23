@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/product_details/Shop_page.dart';
+import 'package:ecommerce_app/Profile.dart';
 import 'package:ecommerce_app/home/widgets/all_featured.dart';
 import 'package:ecommerce_app/home/widgets/category_widget.dart';
 import 'package:ecommerce_app/home/widgets/circleavatar_widget.dart';
@@ -14,11 +14,11 @@ import 'package:ecommerce_app/home/widgets/summer_sale.dart';
 import 'package:ecommerce_app/home/widgets/trending_product.dart';
 import 'package:ecommerce_app/model/category_images.dart';
 import 'package:ecommerce_app/model/images_product.dart';
+import 'package:ecommerce_app/model/item_index.dart';
 import 'package:ecommerce_app/trending/widget/trending_items.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../model/item_index.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ecommerce_app/product_details/Shop_page.dart';
 
 class HomePage extends StatelessWidget {
   final controller = CategoryImages();
@@ -41,10 +41,20 @@ class HomePage extends StatelessWidget {
           ],
         ),
         actions: [
-          CircleAvatar(
-            child: Image.asset(
-              'images/profilelogo.png',
-              height: 40,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(),
+                ),
+              );
+            },
+            child: CircleAvatar(
+              child: Image.asset(
+                'images/profilelogo.png',
+                height: 40,
+              ),
             ),
           ),
           const SizedBox(width: 15),
@@ -78,7 +88,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 16),
               SummerSale(),
               const SizedBox(height: 16),
-              OffShoesWidget()
+              OffShoesWidget(),
             ],
           ),
         ),
