@@ -243,7 +243,6 @@ class _ShopPageState extends State<ShopPage> {
                   const SizedBox(height: 10),
                   ButtonWidget(),
                   const SizedBox(height: 10),
-                  //  add in
                 ],
               ),
             ],

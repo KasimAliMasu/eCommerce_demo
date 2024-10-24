@@ -113,7 +113,7 @@ class CheckoutScreen extends StatelessWidget {
               ShoppingItemCard(
                 imageUrl: 'images/Women’sCasualWear.png',
                 itemName: 'Women\'s Casual Wear',
-                variations: ['Black', 'Red'],
+                variations: const ['Black', 'Red'],
                 rating: 4.8,
                 price: 34.00,
                 oldPrice: 64.00,
