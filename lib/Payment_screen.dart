@@ -1,11 +1,24 @@
 import 'package:ecommerce_app/home/shopping_page.dart';
+import 'package:ecommerce_app/order_success_screen.dart';
 import 'package:ecommerce_app/trending/widget/trending_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
-class PaymentScreen extends StatelessWidget {
+class PaymentScreen extends StatefulWidget {
+  @override
+  _PaymentScreenState createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentScreen> {
+  String selectedPaymentMethod = '';
+
+  void selectPaymentMethod(String method) {
+    setState(() {
+      selectedPaymentMethod = method;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +71,7 @@ class PaymentScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,9 +95,7 @@ class PaymentScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -126,104 +135,14 @@ class PaymentScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 70,
-                color: const Color(0xffF4F4F4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SvgPicture.asset(
-                      'icons/visa1.svg',
-                      height: 50,
-                      width: 80,
-                    ),
-                    Text(
-                      ' *********2109',
-                      style: GoogleFonts.montserrat(
-                        color: const Color(0xff6E7179),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 10),
-              Container(
-                height: 70,
-                color: const Color(0xffF4F4F4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SvgPicture.asset(
-                      'icons/paypal1.svg',
-                      height: 50,
-                      width: 80,
-                    ),
-                    Text(
-                      ' *********2109',
-                      style: GoogleFonts.montserrat(
-                        color: const Color(0xff6E7179),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              buildPaymentOption('Visa', 'images/visa.png'),
               const SizedBox(height: 10),
-              Container(
-                height: 70,
-                color: const Color(0xffF4F4F4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SvgPicture.asset(
-                      'icons/maestro1.svg',
-                      height: 50,
-                      width: 80,
-                    ),
-                    Text(
-                      ' *********2109',
-                      style: GoogleFonts.montserrat(
-                        color: const Color(0xff6E7179),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              buildPaymentOption('PayPal', 'images/paypal.png'),
               const SizedBox(height: 10),
-              Container(
-                height: 70,
-                color: const Color(0xffF4F4F4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SvgPicture.asset(
-                      'icons/AppleIcon.svg',
-                      height: 50,
-                      width: 80,
-                    ),
-                    Text(
-                      ' *********2109',
-                      style: GoogleFonts.montserrat(
-                        color: const Color(0xff6E7179),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              buildPaymentOption('Maestro', 'images/maestro.png'),
+              const SizedBox(height: 10),
+              buildPaymentOption('Apple Pay', 'images/appleicon.png'),
               const SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -233,12 +152,15 @@ class PaymentScreen extends StatelessWidget {
                   ),
                   minimumSize: const Size(300, 50),
                 ),
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => PaymentScreen()),
-                  // );
-                },
+                onPressed: selectedPaymentMethod.isNotEmpty
+                    ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const OrderSuccessScreen()),
+                        );
+                      }
+                    : null,
                 child: const Text(
                   'Continue',
                   style: TextStyle(
@@ -251,91 +173,7 @@ class PaymentScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        shape: const CircularNotchedRectangle(),
-        clipBehavior: Clip.antiAlias,
-        child: SizedBox(
-          height: 76,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
-                    },
-                    child: SvgPicture.asset(
-                      'icons/home 1.svg',
-                    ),
-                  ),
-                  const Text(
-                    "Home",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TrendingItems(
-                            controllers: [],
-                          ),
-                        ),
-                      );
-                    },
-                    child: SvgPicture.asset(
-                      'icons/heart 1.svg',
-                      color: Colors.black,
-                    ),
-                  ),
-                  const Text(
-                    "Wishlist",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              const SizedBox(width: 30),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    'icons/search 1.svg',
-                  ),
-                  const Text(
-                    "Search",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    'icons/settings.svg',
-                  ),
-                  const Text(
-                    "Setting",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         backgroundColor: const Color(0xffEB3030),
@@ -347,6 +185,136 @@ class PaymentScreen extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  Widget buildPaymentOption(String paymentMethod, String assetPath) {
+    return GestureDetector(
+      onTap: () => selectPaymentMethod(paymentMethod),
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: selectedPaymentMethod == paymentMethod
+              ? const Color(0xffF4F4F4)
+              : const Color(0xffF4F4F4),
+          border: selectedPaymentMethod == paymentMethod
+              ? Border.all(
+                  color: Colors.redAccent, width: 2) // Border for selected item
+              : Border.all(color: Colors.transparent),
+          borderRadius:
+              BorderRadius.circular(8), // Optional: to round the corners
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                assetPath,
+                height: 50,
+                width: 80,
+              ),
+              Text(
+                ' *********2109',
+                style: GoogleFonts.montserrat(
+                  color: const Color(0xff6E7179),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildBottomNavigationBar() {
+    return BottomAppBar(
+      color: Colors.white,
+      shape: const CircularNotchedRectangle(),
+      clipBehavior: Clip.antiAlias,
+      child: SizedBox(
+        height: 76,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
+                  },
+                  child: SvgPicture.asset(
+                    'icons/home 1.svg',
+                  ),
+                ),
+                const Text(
+                  "Home",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TrendingItems(
+                          controllers: [],
+                        ),
+                      ),
+                    );
+                  },
+                  child: SvgPicture.asset(
+                    'icons/heart 1.svg',
+                    color: Colors.black,
+                  ),
+                ),
+                const Text(
+                  "Wishlist",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+            const SizedBox(width: 30),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  'icons/search 1.svg',
+                ),
+                const Text(
+                  "Search",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  'icons/settings.svg',
+                ),
+                const Text(
+                  "Setting",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

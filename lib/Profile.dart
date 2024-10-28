@@ -9,6 +9,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _pincodeController = TextEditingController();
@@ -24,9 +25,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email cannot be empty';
+      return 'Enter the email address';
     }
-
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     if (!emailRegex.hasMatch(value)) {
       return 'Enter a valid email address';
@@ -34,9 +34,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return null;
   }
 
-  String? _validateNotEmpty(String? value, String fieldName) {
+  String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return '$fieldName cannot be empty';
+      return 'Enter a password';
+    } else if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+
+  String? _validatePincode(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter a pincode';
+    } else if (value.length != 6) {
+      return 'Pincode must be 6 digits';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'Pincode must contain only numbers';
+    }
+    return null;
+  }
+
+  String? _validateTextField(String? value, String fieldName) {
+    if (value == null || value.isEmpty) {
+      return 'Enter the $fieldName';
+    }
+    return null;
+  }
+
+  String? _validateNumericField(String? value, String fieldName) {
+    if (value == null || value.isEmpty) {
+      return 'Enter the $fieldName';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return '$fieldName must contain only numbers';
     }
     return null;
   }
@@ -48,9 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
         title: Center(
@@ -73,6 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Profile Image Section
                 Center(
                   child: Stack(
                     children: [
@@ -98,28 +126,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
+
                 sectionTitle('Personal Details'),
                 Text(
                   'Email Address',
                   style: GoogleFonts.montserrat(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
                   ),
                 ),
                 buildTextField(
                   controller: _emailController,
-                  label: 'Email Address',
                   validator: _validateEmail,
                 ),
                 Text(
                   'Password',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _passwordController,
-                  label: 'Password',
-                  validator: (value) => _validateNotEmpty(value, 'Password'),
+                  validator: _validatePassword,
                   obscureText: true,
                 ),
                 const SizedBox(height: 8),
@@ -140,86 +173,110 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Text(
                   'Pincode',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _pincodeController,
-                  label: 'Pincode',
-                  validator: (value) => _validateNotEmpty(value, 'Pincode'),
+                  validator: _validatePincode,
                 ),
                 Text(
                   'Address',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _addressController,
-                  label: 'Address',
-                  validator: (value) => _validateNotEmpty(value, 'Address'),
+                  validator: (value) => _validateTextField(value, 'Address'),
                 ),
                 Text(
                   'City',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _cityController,
-                  label: 'City',
-                  validator: (value) => _validateNotEmpty(value, 'City'),
+                  validator: (value) => _validateTextField(value, 'City'),
                 ),
                 Text(
                   'State',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _stateController,
-                  label: 'State',
-                  validator: (value) => _validateNotEmpty(value, 'State'),
+                  validator: (value) => _validateTextField(value, 'State'),
                 ),
                 Text(
                   'Country',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _countryController,
-                  label: 'Country',
-                  validator: (value) => _validateNotEmpty(value, 'Country'),
+                  validator: (value) => _validateTextField(value, 'Country'),
                 ),
                 const SizedBox(height: 20),
                 sectionTitle('Bank Account Details'),
                 Text(
                   'Bank Account Number',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _accountNumberController,
-                  label: 'Bank Account Number',
                   validator: (value) =>
-                      _validateNotEmpty(value, 'Bank Account Number'),
+                      _validateNumericField(value, 'Bank Account Number'),
                 ),
                 Text(
                   'Account Holder’s Name',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _accountHolderController,
-                  label: 'Account Holder\'s Name',
                   validator: (value) =>
-                      _validateNotEmpty(value, 'Account Holder\'s Name'),
+                      _validateTextField(value, 'Account Holder\'s Name'),
                 ),
                 Text(
                   'IFSC Code',
                   style: GoogleFonts.montserrat(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
                 buildTextField(
                   controller: _ifscCodeController,
-                  label: 'IFSC Code',
-                  validator: (value) => _validateNotEmpty(value, 'IFSC Code'),
+                  validator: (value) => _validateTextField(value, 'IFSC Code'),
                 ),
                 const SizedBox(height: 20),
                 Center(
@@ -273,7 +330,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget buildTextField({
     required TextEditingController controller,
-    required String label,
     String? Function(String?)? validator,
     bool obscureText = false,
   }) {
