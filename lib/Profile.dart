@@ -293,7 +293,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CheckoutScreen()),
+                            builder: (context) => CheckoutScreen(),
+                          ),
                         );
                       }
                     },
