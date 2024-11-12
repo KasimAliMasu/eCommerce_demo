@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:ecommerce_app/GetStarted_page.dart';
 import 'package:ecommerce_app/SignIn_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -24,37 +28,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  String? _validateUsernameOrEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your username or email';
+  void createAccount() async {
+    String email = _usernameEmailController.text.trim();
+    String password = _passwordController.text.trim();
+    String cpassword = _confirmPasswordController.text.trim();
+    if (email == "" || password == "" || cpassword == "") {
+      log("Please fill all the detailes!" as num);
+    } else if (password != cpassword) {
+      log("Password do not match" as num);
+    } else {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+        if (userCredential.user != null) {
+          navigator?.pop(context);
+        }
+      } on FirebaseAuthException catch (ex) {
+        log(ex.code.toString() as num);
+      }
     }
-    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-    if (!emailRegex.hasMatch(value) &&
-        !value.contains(RegExp(r'^[a-zA-Z0-9_]+$'))) {
-      return 'Please enter a valid username or email';
-    }
-    return null;
   }
 
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your password';
-    }
-    if (value.length < 6) {
-      return 'Password must be at least 6 characters long';
-    }
-    return null;
-  }
+  // String? _validateUsernameOrEmail(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Please enter your username or email';
+  //   }
+  //   final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+  //   if (!emailRegex.hasMatch(value) &&
+  //       !value.contains(RegExp(r'^[a-zA-Z0-9_]+$'))) {
+  //     return 'Please enter a valid username or email';
+  //   }
+  //   return null;
+  // }
 
-  String? _validateConfirmPassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please confirm your password';
-    }
-    if (value != _passwordController.text) {
-      return 'Passwords do not match';
-    }
-    return null;
-  }
+  // String? _validatePassword(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Please enter your password';
+  //   }
+  //   if (value.length < 6) {
+  //     return 'Password must be at least 6 characters long';
+  //   }
+  //   return null;
+  // }
+
+  // String? _validateConfirmPassword(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Please confirm your password';
+  //   }
+  //   if (value != _passwordController.text) {
+  //     return 'Passwords do not match';
+  //   }
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  validator: _validateUsernameOrEmail,
+                  // validator: _validateUsernameOrEmail,
                 ),
                 const SizedBox(height: 31.0),
                 TextFormField(
@@ -129,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  validator: _validatePassword,
+                  // validator: _validatePassword,
                 ),
                 const SizedBox(height: 31.0),
                 TextFormField(
@@ -156,7 +181,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  validator: _validateConfirmPassword,
+                  // validator: _validateConfirmPassword,
                 ),
                 const SizedBox(height: 19),
                 Align(
@@ -197,6 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () {
+                      createAccount();
                       if (_formKey.currentState!.validate()) {
                         Navigator.push(
                           context,

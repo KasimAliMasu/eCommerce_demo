@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/Forgotpassword_page.dart';
 import 'package:ecommerce_app/GetStarted_page.dart';
 import 'package:ecommerce_app/SignUp_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,27 +26,44 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  String? _validateUsernameOrEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your username or email';
+  void login() async {
+    String email = _usernameEmailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (email == "" || password == "") {
+      log("please fill all the fields");
+    } else {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+        if (userCredential.user != null) {}
+      } on FirebaseAuthException catch (ex) {
+        log(ex.code.toString());
+      }
     }
-    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-    if (!emailRegex.hasMatch(value) &&
-        !value.contains(RegExp(r'^[a-zA-Z0-9_]+$'))) {
-      return 'Please enter a valid username or email';
-    }
-    return null;
   }
 
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your password';
-    }
-    if (value.length < 6) {
-      return 'Password must be at least 6 characters long';
-    }
-    return null;
-  }
+  // String? _validateUsernameOrEmail(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Please enter your username or email';
+  //   }
+  //   final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+  //   if (!emailRegex.hasMatch(value) &&
+  //       !value.contains(RegExp(r'^[a-zA-Z0-9_]+$'))) {
+  //     return 'Please enter a valid username or email';
+  //   }
+  //   return null;
+  // }
+
+  // String? _validatePassword(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Please enter your password';
+  //   }
+  //   if (value.length < 6) {
+  //     return 'Password must be at least 6 characters long';
+  //   }
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +111,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  validator: _validateUsernameOrEmail,
+                  // validator: _validateUsernameOrEmail,
                 ),
                 const SizedBox(height: 31.0),
                 TextFormField(
@@ -118,7 +138,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  validator: _validatePassword,
+                  // validator: _validatePassword,
                 ),
                 const SizedBox(height: 9),
                 Align(
@@ -147,13 +167,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => GetstartedPage()),
-                        );
-                      }
+                      login();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GetstartedPage()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xffF83758),
